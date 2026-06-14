@@ -16,6 +16,8 @@ html {
   scroll-behavior: smooth;
   font-size: 16px;
   -webkit-text-size-adjust: 100%;
+  min-height: 100%;
+  background: #121420;
 }
 
 body {
@@ -23,6 +25,7 @@ body {
   color: #e8d5c4;
   background: linear-gradient(180deg, #121420 0%, #1a1a2e 30%, #16213e 60%, #1a1a2e 100%);
   background-attachment: fixed;
+  min-height: 100vh;
   overflow-x: hidden;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
@@ -166,7 +169,11 @@ body {
 
 .hero-content {
   max-width: 480px;
+  width: 100%;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .hero-prelude {
@@ -179,11 +186,18 @@ body {
 
 .hero-title {
   font-family: 'Great Vibes', cursive;
-  font-size: 2.6rem;
+  width: 100%;
+  max-width: 340px;
+  font-size: clamp(2.35rem, 11vw, 3rem);
   font-weight: 700;
   line-height: 1.15;
   color: #e8d5c4;
   margin-bottom: 16px;
+  text-align: center;
+}
+
+.title-line {
+  display: block;
 }
 
 .emoji-heart {
@@ -269,7 +283,9 @@ body {
   font-family: 'Cormorant Garamond', serif;
   font-size: 1rem;
   font-weight: 500;
-  padding: 14px 36px;
+  align-self: center;
+  max-width: 100%;
+  padding: 14px 28px;
   border: none;
   border-radius: 50px;
   background: linear-gradient(135deg, #8b2a2a 0%, #6b1a1a 100%);
@@ -1096,20 +1112,226 @@ body {
 }
 
 /* ============================================================
-   MEDIA QUERIES – Desktop polish
+   MEDIA QUERIES - Tablet and desktop polish
    ============================================================ */
 @media (min-width: 768px) {
-  .hero-title {
-    font-size: 3.6rem;
+  body {
+    background:
+      radial-gradient(circle at 18% 18%, rgba(139, 42, 42, 0.2) 0%, transparent 30%),
+      radial-gradient(circle at 82% 68%, rgba(201, 168, 76, 0.12) 0%, transparent 28%),
+      linear-gradient(180deg, #121420 0%, #1a1a2e 30%, #16213e 60%, #1a1a2e 100%);
+    background-attachment: fixed;
+  }
+
+  .section {
+    min-height: 92vh;
+    padding: 96px 48px;
   }
 
   .section-title {
-    font-size: 2.2rem;
+    font-size: clamp(2.4rem, 4vw, 4.2rem);
+    margin-bottom: 56px;
+  }
+
+  .hero {
+    min-height: 100vh;
+    padding-top: 96px;
+  }
+
+  .hero-content {
+    width: min(100%, 940px);
+    max-width: none;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(240px, 320px);
+    grid-template-areas:
+      "prelude photo"
+      "title photo"
+      "subtitle photo"
+      "button photo";
+    align-items: center;
+    column-gap: clamp(56px, 8vw, 110px);
+    text-align: left;
+  }
+
+  .hero-prelude {
+    grid-area: prelude;
+    font-size: 1rem;
+  }
+
+  .hero-title {
+    grid-area: title;
+    font-size: clamp(4.2rem, 8vw, 7rem);
+    max-width: 620px;
+    margin-bottom: 18px;
+    text-align: left;
+  }
+
+  .hero-subtitle {
+    grid-area: subtitle;
+    font-size: clamp(1.6rem, 2.8vw, 2.4rem);
+    margin-bottom: 34px;
+  }
+
+  .taped-photo {
+    grid-area: photo;
+    justify-self: center;
+    max-width: 280px;
+    margin-bottom: 0;
+    padding: 12px 12px 34px;
+    box-shadow:
+      0 18px 55px rgba(80, 10, 20, 0.34),
+      0 6px 18px rgba(0, 0, 0, 0.18);
+  }
+
+  .hero-btn {
+    grid-area: button;
+    justify-self: start;
+    align-self: auto;
+    font-size: 1.1rem;
+    padding: 15px 40px;
+  }
+
+  .timeline {
+    max-width: 820px;
+  }
+
+  .timeline-line {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .timeline-item {
+    width: 50%;
+    margin-bottom: 28px;
+  }
+
+  .timeline-item:nth-child(even) {
+    padding-left: 0;
+    padding-right: 58px;
+    text-align: right;
+  }
+
+  .timeline-item:nth-child(odd) {
+    margin-left: 50%;
+    padding-left: 58px;
+  }
+
+  .timeline-item:nth-child(even) .timeline-dot {
+    left: auto;
+    right: -9px;
+  }
+
+  .timeline-item:nth-child(odd) .timeline-dot {
+    left: -9px;
+  }
+
+  .timeline-item:nth-child(even) .dot-special {
+    right: -16px;
+  }
+
+  .timeline-item:nth-child(odd) .dot-special {
+    left: -16px;
+  }
+
+  .timeline-content p {
+    font-size: 1.2rem;
+    line-height: 1.65;
+  }
+
+  .highlight-text {
+    font-size: 1.6rem !important;
+  }
+
+  .kiss-sparkles {
+    justify-content: flex-end;
+  }
+
+  .timeline-item:nth-child(odd) .kiss-sparkles {
+    justify-content: flex-start;
+  }
+
+  .days-number {
+    font-size: clamp(6rem, 10vw, 9rem);
+  }
+
+  .days-label {
+    font-size: 1.25rem;
+  }
+
+  .stats-flow {
+    max-width: 760px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 90px;
+    row-gap: 36px;
+  }
+
+  .stat-phrase {
+    margin-bottom: 0;
+  }
+
+  .stat-value {
+    font-size: 1.85rem;
+  }
+
+  .songs-flow {
+    max-width: 980px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(210px, 1fr));
+    gap: 24px;
+  }
+
+  .details-flow {
+    max-width: 760px;
+  }
+
+  .detail-line {
+    font-size: clamp(1.7rem, 3vw, 2.35rem);
+    margin-bottom: 38px;
+  }
+
+  .carousel-wrapper {
+    max-width: 500px;
+  }
+
+  .carousel-slide {
+    padding: 14px;
+  }
+
+  .carousel-arrow {
+    width: 48px;
+    height: 48px;
+    font-size: 1.8rem;
+  }
+
+  .carousel-prev {
+    left: -20px;
+  }
+
+  .carousel-next {
+    right: -20px;
   }
 
   .lesson-quote,
   .final-message p {
-    font-size: 1.5rem;
+    max-width: 780px;
+    font-size: clamp(2rem, 3vw, 3rem);
+    line-height: 1.45;
+  }
+
+  .video-frame {
+    max-width: 680px;
+    padding: 14px 14px 42px;
+  }
+
+  .finale-section {
+    min-height: 92vh;
+    gap: 46px;
+  }
+
+  .album-frame {
+    max-width: 260px;
+    padding: 10px 10px 34px;
   }
 
   .compat-percent {
@@ -1118,5 +1340,53 @@ body {
 
   .lion-emoji {
     font-size: 6rem;
+  }
+}
+
+@media (min-width: 1100px) {
+  .section {
+    padding-left: 72px;
+    padding-right: 72px;
+  }
+
+  .hero-content {
+    width: min(100%, 1080px);
+    grid-template-columns: minmax(0, 1fr) 340px;
+  }
+
+  .taped-photo {
+    max-width: 320px;
+  }
+
+  .story-section,
+  .stats-section,
+  .songs-section,
+  .details-section,
+  .carousel-section,
+  .video-section {
+    padding-top: 110px;
+    padding-bottom: 110px;
+  }
+
+  .timeline {
+    max-width: 940px;
+  }
+
+  .carousel-wrapper {
+    max-width: 560px;
+  }
+
+  .video-frame {
+    max-width: 760px;
+  }
+}
+
+@media (min-width: 1400px) {
+  .hero-content {
+    width: min(100%, 1180px);
+  }
+
+  .taped-photo {
+    max-width: 350px;
   }
 }
